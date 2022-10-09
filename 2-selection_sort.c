@@ -2,10 +2,10 @@
 
 /**
  * selection_sort - sorts an array of integers
- * 				 in ascending order using the Selection sort algorithm.
+ * in ascending order using the Selection sort algorithm.
  * @array: The array to be sorted.
  * @size: Size of the array.
- * 
+ *
  * Return: Nothing
  */
 
