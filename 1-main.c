@@ -2,7 +2,6 @@
 #include <stdlib.h>
 #include "sort.h"
 
-void insertion_sort_list(listint_t **list);
 listint_t *create_listint(const int *array, size_t size)
 {
     listint_t *list;
@@ -35,34 +34,11 @@ int main(void)
     list = create_listint(array, n);
     if (!list)
         return (1);
-    //print_list(list);
+    print_list(list);
     printf("\n");
     insertion_sort_list(&list);
-    //printf("\n");
-   // print_list(list);
+    printf("\n");
+    print_list(list);
     return (0);
 }
 
-void insertion_sort_list(listint_t **list)
-{
-    listint_t * tr, *pr;
-    tr = (*list)->next;
-    pr = tr->prev;
-
-    while (tr)
-    {
-        while (tr->n < pr->n)
-        {
-            tr->prev = pr->prev;
-            pr->prev->next = tr;
-            tr->next = pr;
-            pr->prev = tr;
-            tr->next->prev = pr;
-            pr->next = tr->next;
-            tr = tr->next;
-            pr = tr->prev;
-        }
-        tr = tr->next;
-        pr = tr->prev;
-    }
-}
