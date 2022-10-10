@@ -29,7 +29,7 @@ void swap(int *x, int *y)
  * @size: Size of the array
  */
 void quick_sort(int *array, size_t size)
-{ 
+{
 	/*srand(time(NULL));*/
 quicksort_recursion(array, 0, size - 1, size);
 }
