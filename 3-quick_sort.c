@@ -7,18 +7,18 @@ int partition(int *array, int low, int high, size_t size);
 
 /**
  * swap - Perform swaps of array elements in quicksort partition
- * 
+ *
  * @x: First element
  * @y: Second element
  */
 
 void swap(int *x, int *y)
 {
-  int temp;
+	int temp;
 
-  temp = *x;
-  *x = *y;
-  *y = temp;
+	temp = *x;
+	*x = *y;
+	*y = temp;
 }
 
 /**
@@ -30,8 +30,8 @@ void swap(int *x, int *y)
  */
 void quick_sort(int *array, size_t size)
 {  
-  /*srand(time(NULL));*/
-  quicksort_recursion(array, 0, size - 1, size);
+	/*srand(time(NULL));*/
+quicksort_recursion(array, 0, size - 1, size);
 }
 
 /**
@@ -44,50 +44,50 @@ void quick_sort(int *array, size_t size)
  */
 void quicksort_recursion(int *array, int low, int high, size_t size)
 {
-  int pivot_index;
+	int pivot_index;
 
-  if (low < high)
-  {
-    pivot_index = partition(array, low, high, size);
-    quicksort_recursion(array, low, pivot_index - 1, size);
-    quicksort_recursion(array, pivot_index + 1, high, size);
-  }
+	if (low < high)
+	{
+		pivot_index = partition(array, low, high, size);
+		quicksort_recursion(array, low, pivot_index - 1, size);
+		quicksort_recursion(array, pivot_index + 1, high, size);
+	}
 }
 
 /**
  * partition - randomly select a pivot value between low-high
  * by randomly selecting an index in the range low - high
- * 
+ *
  * @array: The array input
  * @low: low index
  * @high: high index
- * Return: The pivot index 
+ * Return: The pivot index
  */
 int partition(int *array, int low, int high, size_t size)
 {
-  /**
-   * if (pivot_index != high)
-    swap(&array[pivot_index], &array[high]);
-   */
-  int i = low, j, tmp;
-  int pivot_value = array[high]; 
+	/**
+	 * if (pivot_index != high)
+		swap(&array[pivot_index], &array[high]);
+	 */
+	int i = low, j, tmp;
+	int pivot_value = array[high];
 
-  for (j = low; j < high; j++)
-  {
+	for (j = low; j < high; j++)
+	{
 
-    if (array[j] <= pivot_value)
-    {
-      tmp = array[i];
-      swap(&array[i], &array[j]);
-      if (array[i] != tmp)
-				print_array(array, size);
-      i++;
-    }
-  }
-  tmp = array[i];
-  swap(&array[i], &array[high]);
-  if (array[i] != tmp)
-		print_array(array, size);
+		if (array[j] <= pivot_value)
+		{
+			tmp = array[i];
+			swap(&array[i], &array[j]);
+			if (array[i] != tmp)
+					print_array(array, size);
+			i++;
+		}
+	}
+	tmp = array[i];
+	swap(&array[i], &array[high]);
+	if (array[i] != tmp)
+			print_array(array, size);
 
-   return i;
+	 return (i);
 }
