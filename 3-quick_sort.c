@@ -24,12 +24,12 @@ void swap(int *x, int *y)
 /**
  * quick_sort - sorts an array of integers in ascending order
  * using the Quick sort algorithm
- * 
+ *
  * @array: The array to be sorted
  * @size: Size of the array
  */
 void quick_sort(int *array, size_t size)
-{  
+{ 
 	/*srand(time(NULL));*/
 quicksort_recursion(array, 0, size - 1, size);
 }
@@ -37,7 +37,7 @@ quicksort_recursion(array, 0, size - 1, size);
 /**
  * quicksort_recursion - applies the recursive divide
  * and conquer portion of the quicksort algorithm
- * 
+ *
  * @array: The array to be sorted
  * @low: Low index
  * @high: High index
@@ -80,14 +80,14 @@ int partition(int *array, int low, int high, size_t size)
 			tmp = array[i];
 			swap(&array[i], &array[j]);
 			if (array[i] != tmp)
-					print_array(array, size);
+				print_array(array, size);
 			i++;
 		}
 	}
 	tmp = array[i];
 	swap(&array[i], &array[high]);
 	if (array[i] != tmp)
-			print_array(array, size);
+		print_array(array, size);
 
-	 return (i);
+	return (i);
 }
