@@ -27,13 +27,14 @@ void swap(int array[], int x, int y)
 
 void shell_sort(int *array, size_t size)
 {
-	unsigned int gap = 1, i, j;
+	int gap = 1, i, j, n = size;
 
-	while(gap < size)
+
+	while(gap < n)
 		gap = gap * 3 + 1;
 	for (; gap > 0; gap = (gap - 1) / 3)
 	{
-		for (i = gap; i < size; i++)
+		for (i = gap; i < n; i++)
 		{
 			for (j = i - gap; j >= 0 ; j -= gap)
 			{
@@ -43,6 +44,6 @@ void shell_sort(int *array, size_t size)
 					break;
 			}
 		}
-		print_array(array, size);
+		print_array(array, n);
 	}
 }
