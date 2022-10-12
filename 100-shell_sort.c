@@ -2,10 +2,10 @@
 
 /**
  * swap - Perform swaps of array elements
- * 
+ *
  * @array: array of integers
  * @x: First element
- * @y: Second element 
+ * @y: Second element
  */
 
 void swap(int array[], int x, int y)
@@ -20,7 +20,7 @@ void swap(int array[], int x, int y)
 /**
  * shell_sort - sorts an array of integers in ascending order
  * using the Shell sort algorithm, using the Knuth sequence
- * 
+ *
  * @array: The array input to be sorted
  * @size: Size of the array
  */
@@ -30,7 +30,7 @@ void shell_sort(int *array, size_t size)
 	int gap = 1, i, j, n = size;
 
 
-	while(gap < n)
+	while (gap < n)
 		gap = gap * 3 + 1;
 	for (; gap > 0; gap = (gap - 1) / 3)
 	{
