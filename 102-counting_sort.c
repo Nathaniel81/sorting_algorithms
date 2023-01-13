@@ -1,68 +1,64 @@
 #include "sort.h"
-
+#include <stdlib.h>
 /**
- * swap - for swapping nodesin list
- * @list: list of integers
- * @node: node to swap
- * 
+ * count_array - creates the count array
+ * @array: array of integers
+ * @size: size of array
+ * @k: largest number in unsorted array
+ * Return: the count array
  */
-
-void swap(listint_t **list, listint_t *node)
+int *count_array(int *array, size_t size, int k)
 {
-	node->next->prev = node->prev;
-	if (node->prev)
-		node->prev->next = node->next;
-	else
-		*list = node->next;
-	node->prev = node->next;
-	node->next = node->next->next;
-	node->prev->next = node;
-	if (node->next)
-		node->next->prev = node;
+	int *ca, i;
+	size_t j;
+
+	ca = malloc((k + 1) * sizeof(int));
+	if (ca == NULL)
+		return (NULL);
+	for (i = 0; i < (k + 1); i++)
+		ca[i] = 0;
+	for (j = 0; j < size; j++)
+		ca[array[j]]++;
+	for (i = 1; i <= k; i++)
+		ca[i] = ca[i] + ca[i - 1];
+	print_array(ca, k + 1);
+	return (ca);
 }
-
 /**
- * cocktail_sort_list - sorts a doubly linked list of integers
- * in ascending order, using the Cocktail shaker sort algorithm
- * @list: list of integer
+ * counting_sort - sorts an array of integers in ascending order
+ * using the Counting sort algorithm
+ * @array: array of integers
+ * @size: size of array
  */
-
-void cocktail_sort_list(listint_t **list)
+void counting_sort(int *array, size_t size)
 {
-	int swapped = 1;
-	listint_t *tmp;
+	int *b, k, *ca, j;
+	size_t i;
 
-	if (list == NULL || *list == NULL)
+	if (array == NULL || size < 2)
+		return;
+	k = array[0];
+	for (i = 1; i < size; i++)
+	{
+		if (array[i] > k)
+			k = array[i];
+	}
+
+	ca = count_array(array, size, k);
+	if (ca == NULL)
 		return;
 
-	tmp = *list;
-	while (swapped)
+	b = malloc(size * sizeof(int));
+	if (b == NULL)
 	{
-		swapped = 0;
-		while (tmp->next)
-		{
-			if (tmp->next->n < tmp->n)
-			{
-				swap(list, tmp);
-				swapped = 1;
-				print_list(*list);
-			}
-			else
-				tmp = tmp->next;
-		}
-		if (swapped == 0)
-			break;
-		swapped = 0;
-		while (tmp->prev)
-		{
-			if (tmp->prev->n > tmp->n)
-			{
-				swap(list, tmp->prev);
-				swapped = 1;
-				print_list(*list);
-			}
-			else
-				tmp = tmp->prev;
-		}
+		free(ca);
+		return;
 	}
+
+	for (j = size - 1; j >= 0; j--)
+		b[--ca[array[j]]] = array[j];
+	for (i = 0; i < size; i++)
+		array[i] = b[i];
+	free(b);
+	free(ca);
 }

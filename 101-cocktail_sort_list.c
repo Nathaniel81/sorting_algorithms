@@ -1,34 +1,63 @@
 #include "sort.h"
-
 /**
- * shell_sort - sorts an array of integers in ascending order
- * using the Shell sort algorithm, using the Knuth sequence
-
- * @array: array of integers
- * @size: size of array
- * 
+ * swap - for swapping nodesin list
+ * @list: list of integers
+ * @node: node to swap
  */
- 
-void shell_sort(int *array, size_t size)
+void swap(listint_t **list, listint_t *node)
 {
-	size_t gap = 1, i, j;
-	int tmp;
+	node->next->prev = node->prev;
+	if (node->prev)
+		node->prev->next = node->next;
+	else
+		*list = node->next;
+	node->prev = node->next;
+	node->next = node->next->next;
+	node->prev->next = node;
+	if (node->next)
+		node->next->prev = node;
+}
+/**
+ * cocktail_sort_list - sorts a doubly linked list of integers
+ * in ascending order, using the Cocktail shaker sort algorithm
+ * @list: list of integer
+ */
+void cocktail_sort_list(listint_t **list)
+{
+	int swapped = 1;
+	listint_t *tmp;
 
-	if (array == NULL || size < 2)
+	if (list == NULL || *list == NULL)
 		return;
 
-	while (gap < size / 3)
-		gap = gap * 3 + 1;
-
-	for ( ; gap > 0; gap = (gap - 1) / 3)
+	tmp = *list;
+	while (swapped)
 	{
-		for (i = gap; i < size; i++)
+		swapped = 0;
+		while (tmp->next)
 		{
-			tmp = array[i];
-			for (j = i; j >= gap && array[j - gap] > tmp; j = j - gap)
-				array[j] = array[j - gap];
-			array[j] = tmp;
+			if (tmp->next->n < tmp->n)
+			{
+				swap(list, tmp);
+				swapped = 1;
+				print_list(*list);
+			}
+			else
+				tmp = tmp->next;
 		}
-		print_array(array, size);
+		if (swapped == 0)
+			break;
+		swapped = 0;
+		while (tmp->prev)
+		{
+			if (tmp->prev->n > tmp->n)
+			{
+				swap(list, tmp->prev);
+				swapped = 1;
+				print_list(*list);
+			}
+			else
+				tmp = tmp->prev;
+		}
 	}
 }
